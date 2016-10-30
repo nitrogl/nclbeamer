@@ -1,4 +1,4 @@
-# nclbeamer [![Example](https://img.shields.io/badge/example-pdf-green.svg)](https://raw.githubusercontent.com/nitrogl/nclbeamer/examples/ncl-example.pdf)
+# nclbeamer [![Example](https://img.shields.io/badge/example-pdf-green.svg)](https://raw.githubusercontent.com/nitrogl/nclbeamer/master/examples/ncl-example.pdf)
 Newcastle University LaTeX beamer template
 
 Unofficial LaTeX beamer style for outstanding and professional presentations.
