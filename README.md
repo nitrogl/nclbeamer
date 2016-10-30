@@ -7,7 +7,7 @@ Colours and proportions try to follow as much as possible the [**brand guideline
 
 ## Example
 
-The following are images extracted from the compiled example you can find [**here**](https://raw.githubusercontent.com/nitrogl/nclbeamer/examples/ncl-example.pdf)
+The following are images extracted from the compiled example you can find [**here**](https://raw.githubusercontent.com/nitrogl/nclbeamer/master/examples/ncl-example.pdf)
 
 Page 1 for the presentation for the Faculty of Science
 ![Presentation Science(Page 1)](https://raw.githubusercontent.com/nitrogl/nclbeamer/master/examples/ncl-example-0.jpg)
