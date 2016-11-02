@@ -14,6 +14,7 @@
 % \usepackage{helvet} % Font similar to Arial
 \usepackage{tikz}
 % \usepackage{fontspec} % Needs xelatex (not pdflatex)
+\usepackage{amssymb}
 
 % Official font
 % \setmainfont{Arial} % fontspec package
@@ -31,6 +32,7 @@
 % Default [main]
 \newcommand{\incolour}{}
 \newcommand{\tabtype}{main}
+\newcommand{\fsize}[1]{\fontsize{#1}{#1}}
 
 \colorlet{nclsubidcolour}{nclred}
 \colorlet{nclidcolour}{nclblue}
@@ -219,7 +221,7 @@
 
 \newcommand{\insertnclidentity}{
   \begin{tikzpicture}[remember picture, overlay]
-    \fontsize{1.8mm}{1.8mm}
+    \fsize{1.8mm}
     \color{nclblue}
     \node [anchor=north west, inner sep=0]  at ([xshift=0.81\paperwidth, yshift=-12mm]current page.north west)
       {\mbox{\textbf{\nclsubid}} };
@@ -235,7 +237,7 @@
         \def\thisblockfontheight{2.5mm}
         \fboxrule=0pt
         \fboxsep=0.8mm
-        \fontsize{\thisblockfontheight}{\thisblockfontheight}
+        \fsize{\thisblockfontheight}
         \color{white}
         \ifx\nclsubid\@empty\else\fcbox{nclred}{
           \textbf{\rule{0mm}{\thisblockfontheight}\strut\nclsubid}
@@ -411,26 +413,34 @@
   \vskip 16mm%
   \begin{center}%
     \parbox[t]{0.9\paperwidth}{\color{nclred}\dotfill}%
+    \vskip 5mm
+    \parbox[t]{0.9\paperwidth}{\color{nclred}\dotfill}%
   \end{center}
 }
 
 \setbeamercolor{frametitle}{fg=slidetitle}
 \setbeamertemplate{frametitle}{
-  \vskip -3.5mm
-  \strut\insertsection
+  \vskip -21mm
+  \begin{minipage}{0.75\textwidth}
+  \footnotesize\strut$\bullet\ $\insertsection
   {
   \color{slidetitles}
   \ifx\insertsubsection\@empty
   \else
-    {\normalsize : \insertsubsection}
+    {\\$\circ\ $\scriptsize\insertsubsection}
+    \ifx\insertsubsubsection\@empty
+    \else
+      {(\insertsubsubsection)}
+    \fi
   \fi
-  \vskip 0mm
-  \noindent\hrule
-  \vskip 0mm
-  \noindent\scriptsize \insertsubsubsection \hfill \em \strut\insertframetitle
+  \vskip 1mm
+%   \noindent\hrule
+  }
+  \end{minipage}
+  \vskip 7.5mm
+    \noindent \textbf{\color{nclblue}\normalsize\strut\insertframetitle}
   \vskip -4mm
   \vskip \frametitlemargin
-  }
 }
 
 \setbeamercolor{footline}{fg=nclblue}
