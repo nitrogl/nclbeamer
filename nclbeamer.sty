@@ -83,7 +83,10 @@
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
-      \setbeamercolor{block title}{fg=white,bg=nclblue}
+      \setbeamercolor{block title}{fg=white,bg=white!50!black}
+      \setbeamercolor{block body}{fg=black,bg=white!90!black}
+       \setbeamercolor{itemize item}{fg=white!50!black}
+       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block begin}}
@@ -100,6 +103,8 @@
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title example}{fg=white,bg=green!65!black}
+       \setbeamercolor{itemize item}{fg=green!65!black}
+       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure example}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block example begin}}
@@ -116,6 +121,8 @@
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title alerted}{fg=white,bg=nclred}
+       \setbeamercolor{itemize item}{fg=red!75!black}
+       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block alerted begin}}
@@ -134,7 +141,7 @@
       \mode<presentation>{%
        \setbeamercolor{block title}{fg=green!80!black,bg=black}
        \setbeamercolor{block body}{fg=white,bg=white!20!black}
-       \setbeamercolor{itemize item}{fg=orange!20!black}
+       \setbeamercolor{itemize item}{fg=orange!80!black}
        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
@@ -177,9 +184,9 @@
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=yellow!20!black,bg=yellow!50!white}
-       \setbeamercolor{block body}{fg=black,bg=yellow!30!white}
-       \setbeamercolor{itemize item}{fg=yellow!80!black}
+       \setbeamercolor{block title}{fg=yellow!20!black,bg=yellow!60!white}
+       \setbeamercolor{block body}{fg=black,bg=yellow!25!white}
+       \setbeamercolor{itemize item}{fg=yellow!90!black}
        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
@@ -192,9 +199,9 @@
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=white,bg=nclenglight}
-       \setbeamercolor{block body}{fg=black,bg=nclenglight!20!white}
-       \setbeamercolor{itemize item}{fg=blue!80!black}
+       \setbeamercolor{block title}{fg=white,bg=nclblue}
+       \setbeamercolor{block body}{fg=black,bg=nclblue!20!white}
+       \setbeamercolor{itemize item}{fg=nclblue}
        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
@@ -458,13 +465,14 @@
       \insertshorttitle\ - \insertshortdate
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{}%
-      \begin{tikzpicture}[remember picture, overlay]
-        \fill[nclred,anchor=south east, inner sep=0pt, yshift=-1mm, xshift=-8mm] (0,0) rectangle (7mm,5mm);
-        \node [anchor=south east, inner sep=0pt]  at ([yshift=-0.3mm, xshift=-10.4mm]current page.south east)
-          { \makebox[0.5mm]{\color{white!91!nclred}\large\bfseries\strut\insertframenumber{}} };
-      \end{tikzpicture} of \inserttotalframenumber \hspace*{2ex}
+      of \inserttotalframenumber \hspace*{2ex}
     \end{beamercolorbox}
   }%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[nclred,anchor=south east, inner sep=0pt, yshift=-1mm, xshift=-16mm] (0,0) rectangle (7mm,5mm);
+    \node [anchor=south east, inner sep=0pt]  at ([yshift=-0.3mm, xshift=-11.7mm]current page.south east)
+      { \makebox[0.5mm]{\color{white!91!nclred}\large\bfseries\strut\insertframenumber{}} };
+  \end{tikzpicture}
   \vskip0pt%
 }
 
