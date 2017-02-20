@@ -83,6 +83,7 @@
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
+      \setbeamercolor{block title}{fg=white,bg=nclblue}
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block begin}}
@@ -98,7 +99,7 @@
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
-      \setbeamercolor{block title example}{fg=white,bg=green!70!black}
+      \setbeamercolor{block title example}{fg=white,bg=green!65!black}
       \setbeamercolor{local structure example}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block example begin}}
@@ -114,6 +115,7 @@
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
+      \setbeamercolor{block title alerted}{fg=white,bg=nclred}
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block alerted begin}}
