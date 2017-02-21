@@ -106,7 +106,7 @@
   let
     \p{n}=(childblock.north),
     \p{s}=(childblock.south),
-    \n{h}={veclen(\y{n},\y{s})}
+    \n{h}={1.3*(veclen(\y{n},\y{s})-5)}
   in
   node [rectangle, draw=none, fill=bodycolour, fill opacity=\bodyopacity, overlay, yshift=1mm, right=-1.24mm of childblock.south west, anchor=south west, text width=\cbwidth, text height=\n{h}] {};
 \end{scope}
