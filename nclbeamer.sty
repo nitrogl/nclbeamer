@@ -10,11 +10,15 @@
 \usepackage{minibox}
 \usepackage{varwidth}
 \usepackage{etoolbox}
-% \usepackage{scrextend}
-% \usepackage{helvet} % Font similar to Arial
 \usepackage{tikz}
 % \usepackage{fontspec} % Needs xelatex (not pdflatex)
 \usepackage{amssymb}
+
+% Tikz libraries
+\usetikzlibrary{backgrounds,fit,positioning,calc}
+
+% Block transparency
+\newcommand{\setblockbodyopacity}[1]{\def\blockbodyopacity{#1}}
 
 % Official font
 % \setmainfont{Arial} % fontspec package
@@ -76,136 +80,203 @@
 \newcommand{\framesingletitle}[2][20mm]{{\vskip #1}\noindent{\color{nclstrongcolour} \textbf{\large #2}}{\vskip 2mm}{\vskip \frametitlemargin}}
 \newcommand{\emptyframetitle}{\frametitle{\strut}}
 
+% To gain partially transparent blocks
+\ifx\blockbodyopacity\@empty\else
+  \def\blockbodyopacity{1}
+\fi
+\newcommand{\getnodewidth}[2]{%
+  \pgfextractx{#1}{\pgfpointanchor{#2}{east}}%
+  \pgfextractx{\pgf@xa}{\pgfpointanchor{#2}{west}}%
+  \addtolength{#1}{-\pgf@xa}%
+}
+\newlength\cbwidth
+\newenvironment{blockminipage}[2]{%
+\colorlet{bodycolour}{#1}%
+\newcommand{\bodyopacity}{#2}%
+\begin{tikzpicture}[every node/.style={inner sep=0,outer sep=0}]%
+\node [] (childblock) \bgroup%
+\pgfsetfillopacity{1}%
+\begin{minipage}{\textwidth}%
+}{%
+\end{minipage}%
+\egroup;%
+\getnodewidth{\cbwidth}{childblock}
+\begin{scope}[on background layer]
+  \path
+  let
+    \p{n}=(childblock.north),
+    \p{s}=(childblock.south),
+    \n{h}={veclen(\y{n},\y{s})}
+  in
+  node [rectangle, draw=none, fill=bodycolour, fill opacity=\bodyopacity, overlay, yshift=1mm, right=-1.24mm of childblock.south west, anchor=south west, text width=\cbwidth, text height=\n{h}] {};
+\end{scope}
+\end{tikzpicture}%
+}
+
 \renewenvironment<>{block}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{black!20!white}{\blockbodyopacity}%
   \begin{actionenv}#2%
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title}{fg=white,bg=white!50!black}
-      \setbeamercolor{block body}{fg=black,bg=white!90!black}
-       \setbeamercolor{itemize item}{fg=white!50!black}
-       \setbeamertemplate{itemize item}[triangle]
+      \if\blockbodyopacity1
+        \setbeamercolor{block body}{fg=black,bg=white!90!black}
+      \else
+        \setbeamercolor{block body}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=white!50!black}
+      \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block begin}}
   {\par%
     \usebeamertemplate{block end}%
   \end{actionenv}\vskip \blockbottommargin%
-  \end{minipage}}
+  \end{blockminipage}}
 
 \renewenvironment<>{exampleblock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{green!40!white}{\blockbodyopacity}%
   \begin{actionenv}#2%
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title example}{fg=white,bg=green!65!black}
-       \setbeamercolor{itemize item}{fg=green!65!black}
-       \setbeamertemplate{itemize item}[triangle]
+      \if\blockbodyopacity1
+        \setbeamercolor{block body example}{fg=black,bg=green!10!white}
+      \else
+        \setbeamercolor{block body example}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=green!65!black}
+      \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure example}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block example begin}}
   {\par%
     \usebeamertemplate{block example end}%
   \end{actionenv}\vskip \blockbottommargin%
-  \end{minipage}}
+  \end{blockminipage}}
 
 \renewenvironment<>{alertblock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{nclred!40!white}{\blockbodyopacity}%
   \begin{actionenv}#2%
     \def\insertblocktitle{#1}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title alerted}{fg=white,bg=nclred}
-       \setbeamercolor{itemize item}{fg=red!75!black}
-       \setbeamertemplate{itemize item}[triangle]
+      \if\blockbodyopacity1
+        \setbeamercolor{block body alerted}{fg=black,bg=nclred!10!white}
+      \else
+        \setbeamercolor{block body alerted}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=nclred!75!black}
+      \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
-    \usebeamertemplate{block alerted begin}}
-  {\par%
+    \usebeamertemplate{block alerted begin}%
+  }{\par%
     \usebeamertemplate{block alerted end}%
   \end{actionenv}\vskip \blockbottommargin%
-  \end{minipage}}
+  \end{blockminipage}}
     
 % A few enviroments
 \newenvironment<>{termblock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{black}{\blockbodyopacity}%
   \begin{actionenv}#2%
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=green!80!black,bg=black}
-       \setbeamercolor{block body}{fg=white,bg=white!20!black}
-       \setbeamercolor{itemize item}{fg=orange!80!black}
-       \setbeamertemplate{itemize item}[triangle]
+        \setbeamercolor{block title}{fg=green!80!black,bg=black}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=white,bg=white!20!black}
+        \else
+          \setbeamercolor{block body}{fg=white,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=orange!80!black}
+        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
-    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{minipage}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
 \newenvironment<>{problock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{green!3!white}{\blockbodyopacity}%
   \begin{actionenv} #2%
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=green!80!black,bg=green!5!white}
-       \setbeamercolor{block body}{fg=black,bg=green!1!white}
-       \setbeamercolor{itemize item}{fg=green!80!black}
-       \setbeamertemplate{itemize item}[triangle]
+        \setbeamercolor{block title}{fg=green!80!black,bg=green!5!white}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=green!1!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=green!80!black}
+        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
-    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{minipage}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
 \newenvironment<>{conblock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{red!3!white}{\blockbodyopacity}%
   \begin{actionenv} #2%
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=red!80!black,bg=red!5!white}
-       \setbeamercolor{block body}{fg=black,bg=red!1!white}
-       \setbeamercolor{itemize item}{fg=red!80!black}
-       \setbeamertemplate{itemize item}[triangle]
+        \setbeamercolor{block title}{fg=red!80!black,bg=red!5!white}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=red!1!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=red!80!black}
+        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
-    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{minipage}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
 \newenvironment<>{yellowblock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{yellow!40!white}{\blockbodyopacity}%
   \begin{actionenv} #2%
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=yellow!20!black,bg=yellow!60!white}
-       \setbeamercolor{block body}{fg=black,bg=yellow!25!white}
-       \setbeamercolor{itemize item}{fg=yellow!90!black}
-       \setbeamertemplate{itemize item}[triangle]
+        \setbeamercolor{block title}{fg=yellow!20!black,bg=yellow!60!white}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=yellow!25!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=yellow!90!black}
+        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
-    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{minipage}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
 \newenvironment<>{blueblock}[1]{%
   \vskip \blocktopmargin%
-  \begin{minipage}{\textwidth}%
+  \begin{blockminipage}{nclblue!40!white}{\blockbodyopacity}%
   \begin{actionenv} #2%
       \def\insertblocktitle{#1}%
       \par%
       \mode<presentation>{%
-       \setbeamercolor{block title}{fg=white,bg=nclblue}
-       \setbeamercolor{block body}{fg=black,bg=nclblue!20!white}
-       \setbeamercolor{itemize item}{fg=nclblue}
-       \setbeamertemplate{itemize item}[triangle]
+        \setbeamercolor{block title}{fg=white,bg=nclblue}
+        \if\blockbodyopacity1
+          \setbeamercolor{block body}{fg=black,bg=nclblue!20!white}
+        \else
+          \setbeamercolor{block body}{fg=black,bg=}
+        \fi
+        \setbeamercolor{itemize item}{fg=nclblue}
+        \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
-    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{minipage}}
+    {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
 \setbeamertemplate{blocks}[default]
 
@@ -224,7 +295,7 @@
 
 \newcommand{\insertncltab}[1]{
   \begin{tikzpicture}[remember picture, overlay]
-    \node [anchor=north east, inner sep=0]  at ([xshift=-0.056\paperwidth, yshift=-3mm]current page.north east)
+    \node [anchor=north east, inner sep=0] at ([xshift=-0.056\paperwidth, yshift=-3mm]current page.north east)
       {\pgfuseimage{#1}};
   \end{tikzpicture}
 }
@@ -340,13 +411,13 @@
       % First frame
       \logobg
     }{%
-    \ifnumequal{\c@framenumber}{\inserttotalframenumber}{
-      % Last frame
-      \logobg
-    }{%
-      % Other frames
-      \logobg
-    }
+      \ifnumequal{\c@framenumber}{\inserttotalframenumber}{
+        % Last frame
+        \logobg
+      }{%
+        % Other frames
+        \logobg
+      }
     }%
   }
 }
