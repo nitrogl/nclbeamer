@@ -395,7 +395,7 @@
 }
 
 
-\newcommand{\quotesentence}[1]{\vskip 3cm \begin{center} \color{quotesentence} \textbf{\LARGE #1} \end{center}}
+\newcommand{\quotesentence}[2][1em]{\vskip #1 \begin{minipage}{\textwidth}\begin{center} \color{quotesentence} \textbf{\LARGE #2} \end{center}\end{minipage}}
 
 \newcommand{\logobg}{
   \begin{tikzpicture}[remember picture, overlay]
