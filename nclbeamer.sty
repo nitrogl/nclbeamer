@@ -493,9 +493,15 @@
   \insertnclidentity
   \vskip 16mm%
   \begin{center}%
-    \parbox[t]{0.9\paperwidth}{\color{nclred}\dotfill}%
-    \vskip 5mm
-    \parbox[t]{0.9\paperwidth}{\color{nclred}\dotfill}%
+    \ifx\insertframetitle\@empty
+      \parbox[t]{0.9\paperwidth}{\strut\color{nclred}\dotfill}%
+      \vskip 5mm
+      \parbox[t]{0.9\paperwidth}{\strut}%
+    \else
+      \parbox[t]{0.9\paperwidth}{\strut\color{nclred}\dotfill}%
+      \vskip 2mm
+      \parbox[t]{0.9\paperwidth}{\strut\color{nclred}\dotfill}%
+    \fi
   \end{center}
 }
 
