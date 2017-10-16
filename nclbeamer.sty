@@ -76,8 +76,8 @@
 \newlength{\blocktopmargin}
 \setlength{\blocktopmargin}{0mm}
 
-\newcommand{\noframetitle}[1][20mm]{\vskip #1}
-\newcommand{\framesingletitle}[2][20mm]{{\vskip #1}\noindent{\color{nclstrongcolour} \textbf{\large #2}}{\vskip 2mm}{\vskip \frametitlemargin}}
+\newcommand{\noframetitle}[1][-9mm]{\vskip #1}
+\newcommand{\framesingletitle}[2][16mm]{{\vskip #1}\noindent{\begin{center}\color{slidetitles} {\Huge \textbf #2}\end{center}}{\vskip 2mm}{\vskip \frametitlemargin}}
 \newcommand{\emptyframetitle}{\frametitle{\strut}}
 
 % To gain partially transparent blocks
