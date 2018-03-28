@@ -302,12 +302,13 @@
 
 \newcommand{\insertnclidentity}{
   \begin{tikzpicture}[remember picture, overlay]
-    \fsize{1.8mm}
+    \fsize{1.7mm}
     \color{nclblue}
-    \node [anchor=north west, inner sep=0]  at ([xshift=-26mm, yshift=-12mm]current page.north east)
-      {\mbox{\textbf{\nclsubid}} };
-    \node [anchor=north west, inner sep=0]  at ([xshift=-26mm, yshift=-13.5mm]current page.north east)
-      {\mbox{\textbf{\nclid}} };
+    \node [anchor=north west, inner sep=0]  at ([xshift=-24.5mm, yshift=-12mm]current page.north east)
+      { \begin{minipage}{17.5mm}%
+          \foreignlanguage{nohyphenation}{\textbf{\nclsubid\ \nclid}}%
+        \end{minipage}%
+      };
   \end{tikzpicture}
 }
 
