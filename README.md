@@ -3,7 +3,7 @@ Newcastle University LaTeX beamer template
 
 Unofficial LaTeX beamer style for outstanding and professional presentations.
 
-Colours and proportions try to follow as much as possible the [**brand guidelines**](http://fms-itskills.ncl.ac.uk/docs/universitylogo.pdf) publicly available at the link http://fms-itskills.ncl.ac.uk/docs/universitylogo.pdf
+Colours and proportions try to follow as much as possible the [**brand guidelines**](http://fms-itskills.ncl.ac.uk/docs/universitylogo.pdf), PRIVATELY available at the link http://fms-itskills.ncl.ac.uk/docs/universitylogo.pdf
 
 ## Example
 
