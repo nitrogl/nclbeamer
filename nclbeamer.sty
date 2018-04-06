@@ -84,31 +84,32 @@
 \ifx\blockbodyopacity\@empty\else
   \def\blockbodyopacity{1}
 \fi
-\newcommand{\getnodewidth}[2]{%
-  \pgfextractx{#1}{\pgfpointanchor{#2}{east}}%
-  \pgfextractx{\pgf@xa}{\pgfpointanchor{#2}{west}}%
-  \addtolength{#1}{-\pgf@xa}%
-}
-\newlength\cbwidth
+\newlength{\blockheightcorr}
+\setlength{\blockheightcorr}{-3.16mm}
+\newlength{\blockwidthcorr}
+\setlength{\blockwidthcorr}{2.48mm}
+\newlength{\blockyshcorr}
+\setlength{\blockyshcorr}{-0.53mm}
 \newenvironment{blockminipage}[2]{%
 \colorlet{bodycolour}{#1}%
 \newcommand{\bodyopacity}{#2}%
 \begin{tikzpicture}[every node/.style={inner sep=0,outer sep=0}]%
-\node [] (childblock) \bgroup%
-\pgfsetfillopacity{1}%
+\node [text width=\textwidth] (childblock) \bgroup%
 \begin{minipage}{\textwidth}%
 }{%
 \end{minipage}%
 \egroup;%
-\getnodewidth{\cbwidth}{childblock}
 \begin{scope}[on background layer]
   \path
   let
     \p{n}=(childblock.north),
     \p{s}=(childblock.south),
-    \n{h}={1.3*(veclen(\y{n},\y{s})-5)}
+    \p{w}=(childblock.west),
+    \p{e}=(childblock.east),
+    \n{h}={\y{n}-\y{s}+(\blockheightcorr)},
+    \n{w}={\x{e}-\x{w}+\blockwidthcorr}
   in
-  node [rectangle, draw=none, fill=bodycolour, fill opacity=\bodyopacity, overlay, yshift=1mm, right=-1.24mm of childblock.south west, anchor=south west, text width=\cbwidth, text height=\n{h}] {};
+  node [rectangle, draw=none, fill=bodycolour, yshift=\blockyshcorr, fill opacity=\bodyopacity, overlay, anchor=center, minimum width=\n{w}, minimum height=\n{h}] {};
 \end{scope}
 \end{tikzpicture}%
 }
@@ -128,13 +129,13 @@
       \fi
       \setbeamercolor{itemize item}{fg=white!50!black}
       \setbeamertemplate{itemize item}[triangle]
-      \setbeamercolor{local structure}{use=block title,%
-          fg=block title.bg}}%
+      \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
   {\par%
     \usebeamertemplate{block end}%
   \end{actionenv}\vskip \blockbottommargin%
-  \end{blockminipage}}
+  \end{blockminipage}%
+  }
 
 \renewenvironment<>{exampleblock}[1]{%
   \vskip \blocktopmargin%
@@ -306,7 +307,9 @@
     \color{nclblue}
     \node [anchor=north east, inner sep=0]  at ([xshift=-0.054\paperwidth, yshift=-12mm]current page.north east)
       { \begin{minipage}{17.5mm}%
-          \foreignlanguage{nohyphenation}{\textbf{\nclsubid\ \nclid}}%
+          \begin{hyphenrules}{nohyphenation}%
+            \textbf{{\nclsubid} {\nclid}}
+          \end{hyphenrules}%
         \end{minipage}%
       };
   \end{tikzpicture}
@@ -366,7 +369,7 @@
 % -- end of options
 \ProcessOptions\relax
 
-% TAB - Synced width and height (Strath title relates to it)
+% TAB - Synced width and height (NCL title relates to it)
 \pgfdeclareimage[interpolate=true,width=24.7500433333mm, height=8.13044666667mm]{ncl_tab}{nclbeamer/ncl_logo.pdf}
 \pgfdeclareimage[interpolate=true,width=24.7500433333mm, height=8.13044666667mm]{ncl_tab_institute}{nclbeamer/ncl_logo_institute.pdf}
 % \pgfdeclareimage[interpolate=true,width=0.136\paperwidth, height=20mm]{ncl_tab}{nclbeamer/ncl_tab_\tabtype\incolour.pdf}
