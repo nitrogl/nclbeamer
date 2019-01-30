@@ -333,6 +333,11 @@
   \end{tikzpicture}
 }
 
+% Cover
+\pgfdeclareimage[interpolate=true,width=\paperwidth]{bottomtitle}{nclbeamer/cover.pdf}
+\pgfdeclareimage[interpolate=true,width=\paperwidth]{bottomtitlehead}{nclbeamer/cover-head.pdf}
+\newcommand{\bgimg}{bottomtitle}
+
 % Unknown option
 \DeclareOption*{
   \PackageWarning{nclbeamer}{Unknown option '\CurrentOption'}
@@ -342,6 +347,13 @@
 \def\whitebg{1}
 \DeclareOption{nclbg}{
 \def\whitebg{0}
+}
+
+% Clear canvas
+\def\whitebg{1}
+\DeclareOption{nclbghead}{
+\def\whitebg{0}
+\renewcommand{\bgimg}{bottomtitlehead}
 }
 
 % Coloured logo
@@ -374,9 +386,6 @@
 \pgfdeclareimage[interpolate=true,width=24.7500433333mm, height=8.13044666667mm]{ncl_tab_institute}{nclbeamer/ncl_logo_institute.pdf}
 % \pgfdeclareimage[interpolate=true,width=0.136\paperwidth, height=20mm]{ncl_tab}{nclbeamer/ncl_tab_\tabtype\incolour.pdf}
 
-% Cover
-\pgfdeclareimage[interpolate=true,width=\paperwidth]{bottomtitle}{nclbeamer/cover.pdf}
-
 
 % Removes nav in pages
 \usenavigationsymbolstemplate{}
@@ -401,10 +410,10 @@
 
 \newcommand{\quotesentence}[2][1em]{\vskip #1 \begin{minipage}{\textwidth}\begin{center} \color{quotesentence} \textbf{\LARGE #2} \end{center}\end{minipage}}
 
-\newcommand{\logobg}{
+\newcommand{\logobg}[1]{
   \begin{tikzpicture}[remember picture, overlay]
     \node [anchor=south east, inner sep=0pt]  at (current page.south east)
-      {\pgfuseimage{bottomtitle} };
+      {\pgfuseimage{#1} };
   \end{tikzpicture}
 }
 
@@ -413,14 +422,14 @@
   \ifnumequal{\whitebg}{1}{}{
     \ifnumequal{\c@framenumber}{1}{%
       % First frame
-      \logobg
+      \logobg{\bgimg}
     }{%
       \ifnumequal{\c@framenumber}{\inserttotalframenumber}{
         % Last frame
-        \logobg
+        \logobg{\bgimg}
       }{%
         % Other frames
-        \logobg
+        \logobg{\bgimg}
       }
     }%
   }
