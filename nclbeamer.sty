@@ -116,6 +116,71 @@
 
 \renewenvironment<>{block}[1]{%
   \vskip \blocktopmargin%
+  \begin{blockminipage}{white}{0}%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{\hspace{.3em}\bfseries#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title}{fg=black!80!white,bg=}
+      \setbeamercolor{block body}{fg=black!90!white,bg=}
+      \setbeamercolor{itemize item}{fg=nclblue}
+      \setbeamertemplate{itemize item}[triangle]
+      \setbeamercolor{local structure}{fg=block title.bg}}%
+    \usebeamertemplate{block begin}
+    {\vspace{-1em}\color{black!40!white}\tiny\hrulefill}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}\vskip \blockbottommargin%
+  \end{blockminipage}%
+  }
+
+
+\renewenvironment<>{cleanblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{white}{0}%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{\bfseries#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title}{fg=black!80!white,bg=}
+      \setbeamercolor{block body}{fg=black!90!white,bg=}
+      \setbeamercolor{itemize item}{fg=nclred}
+      \setbeamertemplate{itemize item}[triangle]
+      \setbeamercolor{local structure}{fg=block title.bg}}%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}\vskip \blockbottommargin%
+  \end{blockminipage}%
+  }
+
+
+\renewenvironment<>{whiteblock}[1]{%
+  \vskip \blocktopmargin%
+  \begin{blockminipage}{white}{\blockbodyopacity}%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{\bfseries#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title}{fg=white!10!black,bg=white}
+      \if\blockbodyopacity1
+        \setbeamercolor{block body}{fg=black,bg=white}
+      \else
+        \setbeamercolor{block body}{fg=black,bg=}
+      \fi
+      \setbeamercolor{itemize item}{fg=white!90!black}
+      \setbeamertemplate{itemize item}[triangle]
+      \setbeamercolor{local structure}{fg=block title.bg}}%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}\vskip \blockbottommargin%
+  \end{blockminipage}%
+  }
+
+
+\renewenvironment<>{grayblock}[1]{%
+  \vskip \blocktopmargin%
   \begin{blockminipage}{black!20!white}{\blockbodyopacity}%
   \begin{actionenv}#2%
     \def\insertblocktitle{#1}%
@@ -188,7 +253,7 @@
   \vskip \blocktopmargin%
   \begin{blockminipage}{black}{\blockbodyopacity}%
   \begin{actionenv}#2%
-      \def\insertblocktitle{#1}%
+      \def\insertblocktitle{\bfseries#1}%
       \par%
       \mode<presentation>{%
         \setbeamercolor{block title}{fg=green!80!black,bg=black}
@@ -197,7 +262,7 @@
         \else
           \setbeamercolor{block body}{fg=white,bg=}
         \fi
-        \setbeamercolor{itemize item}{fg=orange!80!black}
+        \setbeamercolor{itemize item}{fg=green!90!black}
         \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
@@ -536,7 +601,7 @@
   \vskip 1mm
 %   \noindent\hrule
   }
-  \end{minipage}
+  \end{minipage}%
   \vskip 8mm
     \noindent \textbf{\color{nclblue}\normalsize\strut\insertframetitle}
   \vskip -2mm
