@@ -114,6 +114,7 @@
 \end{tikzpicture}%
 }
 
+
 \renewenvironment<>{block}[2][nclblue]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{white}{0}%
@@ -124,11 +125,13 @@
       \setbeamercolor{block title}{fg=black!80!white,bg=}
       \setbeamercolor{block body}{fg=black!90!white,bg=}
       \setbeamercolor{itemize item}{fg=#1}
+      \setbeamercolor{itemize subitem}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
-      \setbeamercolor{local structure}{fg=block title.bg}
-      }%
+      \setbeamertemplate{itemize subitem}[circle]
+      \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}
-    {\vspace{-1em}\color{black!40!white}\tiny\hrulefill}}
+    {\vspace{-1em}\color{black!40!white}\tiny\hrulefill}
+    }
   {\par%
     \usebeamertemplate{block end}%
   \end{actionenv}\vskip \blockbottommargin%
@@ -146,7 +149,9 @@
       \setbeamercolor{block title}{fg=black!80!white,bg=}
       \setbeamercolor{block body}{fg=black!90!white,bg=}
       \setbeamercolor{itemize item}{fg=#1}
+      \setbeamercolor{itemize subitem}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
+      \setbeamertemplate{itemize subitem}[circle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
   {\par%
@@ -170,7 +175,9 @@
         \setbeamercolor{block body}{fg=black,bg=}
       \fi
       \setbeamercolor{itemize item}{fg=#1}
+      \setbeamercolor{itemize subitem}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
+      \setbeamertemplate{itemize subitem}[circle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
   {\par%
@@ -194,7 +201,9 @@
         \setbeamercolor{block body}{fg=black,bg=}
       \fi
       \setbeamercolor{itemize item}{fg=#1}
+      \setbeamercolor{itemize subitem}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
+      \setbeamertemplate{itemize subitem}[circle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
   {\par%
@@ -217,7 +226,9 @@
         \setbeamercolor{block body example}{fg=black,bg=}
       \fi
       \setbeamercolor{itemize item}{fg=#1}
+      \setbeamercolor{itemize subitem}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
+      \setbeamertemplate{itemize subitem}[circle]
       \setbeamercolor{local structure example}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block example begin}}
@@ -240,7 +251,9 @@
         \setbeamercolor{block body alerted}{fg=black,bg=}
       \fi
       \setbeamercolor{itemize item}{fg=#1}
+      \setbeamercolor{itemize subitem}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
+      \setbeamertemplate{itemize subitem}[circle]
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
     \usebeamertemplate{block alerted begin}%
@@ -264,7 +277,9 @@
           \setbeamercolor{block body}{fg=white,bg=}
         \fi
         \setbeamercolor{itemize item}{fg=#1}
+        \setbeamercolor{itemize subitem}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
+        \setbeamertemplate{itemize subitem}[circle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
@@ -283,7 +298,9 @@
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
         \setbeamercolor{itemize item}{fg=#1}
+        \setbeamercolor{itemize subitem}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
+        \setbeamertemplate{itemize subitem}[circle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
@@ -302,7 +319,9 @@
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
         \setbeamercolor{itemize item}{fg=#1}
+        \setbeamercolor{itemize subitem}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
+        \setbeamertemplate{itemize subitem}[circle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
@@ -321,7 +340,9 @@
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
         \setbeamercolor{itemize item}{fg=#1}
+        \setbeamercolor{itemize subitem}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
+        \setbeamertemplate{itemize subitem}[circle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
@@ -339,8 +360,10 @@
         \else
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
-        \setbeamercolor{itemize item}{fg=nclblue}
+        \setbeamercolor{itemize item}{fg=#1}
+        \setbeamercolor{itemize subitem}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
+        \setbeamertemplate{itemize subitem}[circle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
