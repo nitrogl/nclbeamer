@@ -114,16 +114,16 @@
 \end{tikzpicture}%
 }
 
-\renewenvironment<>{block}[1]{%
+\renewenvironment<>{block}[2][nclblue]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{white}{0}%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{\hspace{.3em}\bfseries#1}%
+  \begin{actionenv}#3%
+    \def\insertblocktitle{\hspace{.3em}\bfseries#2}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title}{fg=black!80!white,bg=}
       \setbeamercolor{block body}{fg=black!90!white,bg=}
-      \setbeamercolor{itemize item}{fg=nclblue}
+      \setbeamercolor{itemize item}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}
@@ -135,16 +135,16 @@
   }
 
 
-\renewenvironment<>{cleanblock}[1]{%
+\renewenvironment<>{cleanblock}[2][nclred]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{white}{0}%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{\bfseries#1}%
+  \begin{actionenv}#3%
+    \def\insertblocktitle{\bfseries#2}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title}{fg=black!80!white,bg=}
       \setbeamercolor{block body}{fg=black!90!white,bg=}
-      \setbeamercolor{itemize item}{fg=nclred}
+      \setbeamercolor{itemize item}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
@@ -155,11 +155,11 @@
   }
 
 
-\renewenvironment<>{whiteblock}[1]{%
+\renewenvironment<>{whiteblock}[2][white!90!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{white}{\blockbodyopacity}%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{\bfseries#1}%
+  \begin{actionenv}#3%
+    \def\insertblocktitle{\bfseries#2}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title}{fg=white!10!black,bg=white}
@@ -168,7 +168,7 @@
       \else
         \setbeamercolor{block body}{fg=black,bg=}
       \fi
-      \setbeamercolor{itemize item}{fg=white!90!black}
+      \setbeamercolor{itemize item}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
@@ -179,11 +179,11 @@
   }
 
 
-\renewenvironment<>{grayblock}[1]{%
+\renewenvironment<>{grayblock}[2][white!50!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{black!20!white}{\blockbodyopacity}%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title}{fg=white,bg=white!50!black}
@@ -192,7 +192,7 @@
       \else
         \setbeamercolor{block body}{fg=black,bg=}
       \fi
-      \setbeamercolor{itemize item}{fg=white!50!black}
+      \setbeamercolor{itemize item}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{fg=block title.bg}}%
     \usebeamertemplate{block begin}}
@@ -202,11 +202,11 @@
   \end{blockminipage}%
   }
 
-\renewenvironment<>{exampleblock}[1]{%
+\renewenvironment<>{exampleblock}[2][green!65!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{green!40!white}{\blockbodyopacity}%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title example}{fg=white,bg=green!65!black}
@@ -215,7 +215,7 @@
       \else
         \setbeamercolor{block body example}{fg=black,bg=}
       \fi
-      \setbeamercolor{itemize item}{fg=green!65!black}
+      \setbeamercolor{itemize item}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure example}{use=block title,%
           fg=block title.bg}}%
@@ -225,11 +225,11 @@
   \end{actionenv}\vskip \blockbottommargin%
   \end{blockminipage}}
 
-\renewenvironment<>{alertblock}[1]{%
+\renewenvironment<>{alertblock}[2][nclred!75!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{nclred!40!white}{\blockbodyopacity}%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
     \par%
     \mode<presentation>{%
       \setbeamercolor{block title alerted}{fg=white,bg=nclred}
@@ -238,7 +238,7 @@
       \else
         \setbeamercolor{block body alerted}{fg=black,bg=}
       \fi
-      \setbeamercolor{itemize item}{fg=nclred!75!black}
+      \setbeamercolor{itemize item}{fg=#1}
       \setbeamertemplate{itemize item}[triangle]
       \setbeamercolor{local structure}{use=block title,%
           fg=block title.bg}}%
@@ -249,11 +249,11 @@
   \end{blockminipage}}
     
 % A few enviroments
-\newenvironment<>{termblock}[1]{%
+\newenvironment<>{termblock}[2][green!90!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{black}{\blockbodyopacity}%
-  \begin{actionenv}#2%
-      \def\insertblocktitle{\bfseries#1}%
+  \begin{actionenv}#3%
+      \def\insertblocktitle{\bfseries#2}%
       \par%
       \mode<presentation>{%
         \setbeamercolor{block title}{fg=green!80!black,bg=black}
@@ -262,17 +262,17 @@
         \else
           \setbeamercolor{block body}{fg=white,bg=}
         \fi
-        \setbeamercolor{itemize item}{fg=green!90!black}
+        \setbeamercolor{itemize item}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
-\newenvironment<>{problock}[1]{%
+\newenvironment<>{problock}[2][green!80!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{green!3!white}{\blockbodyopacity}%
-  \begin{actionenv} #2%
-      \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+      \def\insertblocktitle{#2}%
       \par%
       \mode<presentation>{%
         \setbeamercolor{block title}{fg=green!80!black,bg=green!5!white}
@@ -281,17 +281,17 @@
         \else
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
-        \setbeamercolor{itemize item}{fg=green!80!black}
+        \setbeamercolor{itemize item}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
-\newenvironment<>{conblock}[1]{%
+\newenvironment<>{conblock}[2][red!80!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{red!3!white}{\blockbodyopacity}%
-  \begin{actionenv} #2%
-      \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+      \def\insertblocktitle{#2}%
       \par%
       \mode<presentation>{%
         \setbeamercolor{block title}{fg=red!80!black,bg=red!5!white}
@@ -300,17 +300,17 @@
         \else
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
-        \setbeamercolor{itemize item}{fg=red!80!black}
+        \setbeamercolor{itemize item}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
-\newenvironment<>{yellowblock}[1]{%
+\newenvironment<>{yellowblock}[2][yellow!90!black]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{yellow!40!white}{\blockbodyopacity}%
-  \begin{actionenv} #2%
-      \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+      \def\insertblocktitle{#2}%
       \par%
       \mode<presentation>{%
         \setbeamercolor{block title}{fg=yellow!20!black,bg=yellow!60!white}
@@ -319,17 +319,17 @@
         \else
           \setbeamercolor{block body}{fg=black,bg=}
         \fi
-        \setbeamercolor{itemize item}{fg=yellow!90!black}
+        \setbeamercolor{itemize item}{fg=#1}
         \setbeamertemplate{itemize item}[triangle]
      }%
       \usebeamertemplate{block begin}}
     {\par\usebeamertemplate{block end}\end{actionenv}\vskip \blockbottommargin\end{blockminipage}}
     
-\newenvironment<>{blueblock}[1]{%
+\newenvironment<>{blueblock}[2][nclblue]{%
   \vskip \blocktopmargin%
   \begin{blockminipage}{nclblue!40!white}{\blockbodyopacity}%
-  \begin{actionenv} #2%
-      \def\insertblocktitle{#1}%
+  \begin{actionenv}#3%
+      \def\insertblocktitle{#2}%
       \par%
       \mode<presentation>{%
         \setbeamercolor{block title}{fg=white,bg=nclblue}
