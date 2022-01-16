@@ -92,7 +92,7 @@
 \setlength{\blockyshcorr}{-0.53mm}
 \newenvironment{blockminipage}[2]{%
 \colorlet{bodycolour}{#1}%
-\newcommand{\bodyopacity}{#2}%
+\@ifundefined{bodyopacity}{\newcommand{\bodyopacity}{#2}}{\renewcommand{\bodyopacity}{#2}}%
 \begin{tikzpicture}[every node/.style={inner sep=0,outer sep=0}]%
 \node [text width=\textwidth] (childblock) \bgroup%
 \begin{minipage}{\textwidth}%
